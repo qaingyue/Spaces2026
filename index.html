@@ -1,42 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Network - Protect Earth</title>
+    <title>TechLife | 科技改变生活</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', "Microsoft YaHei", Tahoma, Geneva, Verdana, sans-serif;
         }
 
         :root {
-            --primary: #2e7d32;
-            --secondary: #4caf50;
-            --accent: #8bc34a;
-            --light: #e8f5e9;
-            --dark: #1b5e20;
-            --text: #333333;
+            --primary: #0d47a1;    /* 核心深蓝 */
+            --secondary: #1976d2;  /* 明亮蓝 */
+            --accent: #00e5ff;     /* 霓虹青 - 用于高亮和发光效果 */
+            --accent-purple: #b388ff; /* 霓虹紫 - 用于渐变 */
+            --bg-main: #0a192f;    /* 主背景色 - 深空科技黑 */
+            --bg-card: #112240;    /* 卡片背景色 */
+            --text-main: #ccd6f6;  /* 主标题文字 */
+            --text-muted: #8892b0; /* 正文灰 */
             --white: #ffffff;
         }
 
         body {
-            background-color: var(--light);
-            color: var(--text);
+            background-color: var(--bg-main);
+            color: var(--text-muted);
             line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* 文字渐变特效 */
+        .gradient-text {
+            background: linear-gradient(45deg, var(--accent), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
+            background: rgba(10, 25, 47, 0.85);
+            backdrop-filter: blur(10px);
             color: var(--white);
             padding: 1rem 0;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(0, 229, 255, 0.1);
         }
 
         .container {
@@ -57,10 +68,13 @@
             gap: 10px;
             font-size: 1.8rem;
             font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--text-main);
         }
 
         .logo i {
             font-size: 2rem;
+            color: var(--accent);
         }
 
         nav ul {
@@ -73,7 +87,7 @@
         }
 
         nav ul li a {
-            color: var(--white);
+            color: var(--text-main);
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s ease;
@@ -94,17 +108,20 @@
             height: 2px;
             background-color: var(--accent);
             transition: width 0.3s ease;
+            box-shadow: 0 0 8px var(--accent);
         }
 
         nav ul li a:hover::after {
             width: 100%;
         }
 
+        /* 首屏 Hero 区域 */
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
+            background: linear-gradient(rgba(10, 25, 47, 0.8), rgba(13, 71, 161, 0.6)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=2072&q=80');
             background-size: cover;
             background-position: center;
-            height: 80vh;
+            background-attachment: fixed;
+            height: 90vh;
             display: flex;
             align-items: center;
             text-align: center;
@@ -117,48 +134,64 @@
         }
 
         .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-main);
+            letter-spacing: 2px;
+            line-height: 1.2;
         }
 
         .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            color: var(--text-muted);
         }
 
         .btn {
             display: inline-block;
-            background-color: var(--accent);
-            color: var(--white);
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
+            background-color: transparent;
+            color: var(--accent);
+            padding: 0.8rem 2.5rem;
+            border-radius: 4px;
             text-decoration: none;
             font-weight: 600;
             transition: all 0.3s ease;
-            border: none;
+            border: 1px solid var(--accent);
             cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            letter-spacing: 1px;
         }
 
         .btn:hover {
-            background-color: var(--primary);
+            background-color: rgba(0, 229, 255, 0.1);
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
             transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: var(--bg-main);
+            border: none;
+            box-shadow: 0 4px 15px rgba(0, 229, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--white);
+            color: var(--primary);
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.4);
         }
 
         section {
-            padding: 5rem 0;
+            padding: 6rem 0;
         }
 
         .section-title {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
         }
 
         .section-title h2 {
             font-size: 2.5rem;
-            color: var(--primary);
+            color: var(--text-main);
             margin-bottom: 1rem;
             position: relative;
             display: inline-block;
@@ -170,29 +203,38 @@
             bottom: -10px;
             left: 50%;
             transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
+            width: 60px;
+            height: 3px;
             background-color: var(--accent);
             border-radius: 2px;
+            box-shadow: 0 0 10px var(--accent);
         }
 
-        .section-title p {
-            color: var(--text);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
+        /* 愿景模块 */
         .about-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 3rem;
+            gap: 4rem;
             align-items: center;
         }
 
         .about-img {
-            border-radius: 10px;
+            border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .about-img::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 229, 255, 0.2);
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+
+        .about-img:hover::before {
+            background: transparent;
         }
 
         .about-img img {
@@ -207,76 +249,87 @@
         }
 
         .about-text h3 {
-            font-size: 1.8rem;
+            font-size: 2rem;
             margin-bottom: 1.5rem;
-            color: var(--dark);
+            color: var(--text-main);
         }
 
         .about-text p {
             margin-bottom: 1.5rem;
+            font-size: 1.1rem;
         }
 
+        /* 数据统计面板 */
         .stats {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 2rem;
-            margin-top: 3rem;
+            margin-top: 5rem;
         }
 
         .stat-item {
             text-align: center;
-            padding: 2rem 1rem;
-            background-color: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
+            padding: 2.5rem 1rem;
+            background-color: var(--bg-card);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s ease;
         }
 
         .stat-item:hover {
             transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(0, 229, 255, 0.1);
         }
 
         .stat-item i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
         }
 
         .stat-item h3 {
-            font-size: 2.5rem;
-            color: var(--dark);
+            font-size: 2.8rem;
+            color: var(--text-main);
             margin-bottom: 0.5rem;
+            font-weight: 700;
         }
 
         .stat-item p {
-            color: var(--text);
+            color: var(--accent-purple);
+            font-weight: 600;
+            letter-spacing: 1px;
         }
 
+        /* 核心技术与应用场景 */
         .initiatives {
-            background-color: var(--white);
+            background-color: #0b1d3a;
         }
 
         .initiatives-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
+            gap: 2.5rem;
         }
 
         .initiative-card {
-            background-color: var(--light);
-            border-radius: 10px;
+            background-color: var(--bg-card);
+            border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .initiative-card:hover {
             transform: translateY(-10px);
+            border-color: rgba(0, 229, 255, 0.5);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 229, 255, 0.2);
         }
 
         .initiative-img {
-            height: 200px;
+            height: 220px;
             overflow: hidden;
+            position: relative;
         }
 
         .initiative-img img {
@@ -291,65 +344,77 @@
         }
 
         .initiative-content {
-            padding: 1.5rem;
+            padding: 2rem;
         }
 
         .initiative-content h3 {
             font-size: 1.5rem;
             margin-bottom: 1rem;
-            color: var(--dark);
+            color: var(--text-main);
         }
 
         .initiative-content p {
             margin-bottom: 1.5rem;
+            font-size: 0.95rem;
         }
 
+        /* 呼吁行动 CTA */
         .cta {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
+            background: linear-gradient(135deg, var(--bg-main) 0%, #1a365d 100%);
+            border-top: 1px solid rgba(0, 229, 255, 0.2);
+            border-bottom: 1px solid rgba(0, 229, 255, 0.2);
             text-align: center;
-            padding: 5rem 0;
+            padding: 6rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(0,229,255,0.1) 0%, transparent 60%);
+            z-index: 0;
+        }
+
+        .cta .container {
+            position: relative;
+            z-index: 1;
         }
 
         .cta h2 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 1.5rem;
+            color: var(--text-main);
         }
 
         .cta p {
             font-size: 1.2rem;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
+            color: var(--text-muted);
         }
 
-        .cta .btn {
-            background-color: var(--white);
-            color: var(--primary);
-        }
-
-        .cta .btn:hover {
-            background-color: var(--accent);
-            color: var(--white);
-        }
-
+        /* 页脚 */
         footer {
-            background-color: var(--dark);
-            color: var(--white);
-            padding: 3rem 0 1rem;
+            background-color: #020c1b;
+            color: var(--text-muted);
+            padding: 4rem 0 1rem;
         }
 
         .footer-content {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
+            gap: 3rem;
+            margin-bottom: 3rem;
         }
 
         .footer-column h3 {
             font-size: 1.3rem;
             margin-bottom: 1.5rem;
+            color: var(--text-main);
             position: relative;
             padding-bottom: 10px;
         }
@@ -364,10 +429,6 @@
             background-color: var(--accent);
         }
 
-        .footer-column p {
-            margin-bottom: 1rem;
-        }
-
         .footer-links {
             list-style: none;
         }
@@ -377,7 +438,7 @@
         }
 
         .footer-links li a {
-            color: var(--light);
+            color: var(--text-muted);
             text-decoration: none;
             transition: all 0.3s ease;
         }
@@ -390,6 +451,7 @@
         .social-links {
             display: flex;
             gap: 1rem;
+            margin-top: 1.5rem;
         }
 
         .social-links a {
@@ -398,56 +460,51 @@
             justify-content: center;
             width: 40px;
             height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: var(--bg-card);
             border-radius: 50%;
-            color: var(--white);
+            color: var(--text-main);
             text-decoration: none;
             transition: all 0.3s ease;
         }
 
         .social-links a:hover {
             background-color: var(--accent);
+            color: var(--bg-main);
             transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 229, 255, 0.4);
         }
 
         .copyright {
             text-align: center;
             padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.9rem;
         }
 
         .mobile-menu {
             display: none;
             font-size: 1.5rem;
             cursor: pointer;
+            color: var(--accent);
         }
 
+        /* 响应式设计 */
         @media (max-width: 992px) {
-            .about-content {
-                grid-template-columns: 1fr;
+            .about-content, .footer-content {
+                grid-template-columns: 1fr 1fr;
             }
-            
             .initiatives-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-            
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
             .stats {
                 grid-template-columns: repeat(2, 1fr);
             }
+            .hero h1 { font-size: 3rem; }
         }
 
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
+            .hero h1 { font-size: 2.2rem; }
+            .hero p { font-size: 1rem; }
             
             nav ul {
                 display: none;
@@ -455,249 +512,251 @@
                 top: 100%;
                 left: 0;
                 width: 100%;
-                background-color: var(--primary);
+                background-color: var(--bg-card);
                 flex-direction: column;
                 padding: 1rem 0;
                 text-align: center;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                border-bottom: 1px solid var(--accent);
             }
             
-            nav ul.active {
-                display: flex;
-            }
+            nav ul.active { display: flex; }
+            nav ul li { margin: 0; padding: 1rem 0; }
+            .mobile-menu { display: block; }
             
-            nav ul li {
-                margin: 0;
-                padding: 0.8rem 0;
-            }
-            
-            .mobile-menu {
-                display: block;
-            }
-            
-            .initiatives-grid {
+            .about-content, .initiatives-grid, .footer-content, .stats {
                 grid-template-columns: 1fr;
             }
             
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animation for stats counter */
-        .counter {
-            transition: all 0.5s ease;
+            .stats { gap: 1.5rem; }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header>
         <div class="container nav-container">
             <div class="logo">
-                <i class="fas fa-seedling"></i>
-                <span>Green Network</span>
+                <i class="fas fa-microchip"></i>
+                <span>Tech<span class="gradient-text">Life</span></span>
             </div>
             <nav>
                 <div class="mobile-menu">
                     <i class="fas fa-bars"></i>
                 </div>
                 <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#initiatives">Initiatives</a></li>
-                    <li><a href="#get-involved">Get Involved</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#home">主页</a></li>
+                    <li><a href="#about">愿景</a></li>
+                    <li><a href="#technologies">核心技术</a></li>
+                    <li><a href="#join">加入我们</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="container hero-content">
-            <h1>Protect Our Planet, Preserve Our Future</h1>
-            <p>Join the global movement to create a sustainable world through conservation, education, and community action.</p>
-            <a href="#get-involved" class="btn">Join Our Network</a>
+            <h1>探索边界 <span class="gradient-text">重塑未来</span></h1>
+            <p>融合人工智能、物联网与量子计算，我们致力于用前沿科技打破物理世界的界限，为您构建更智能、更高效的数字生活新范式。</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="#technologies" class="btn btn-primary">探索技术</a>
+                <a href="#join" class="btn">申请内测</a>
+            </div>
         </div>
     </section>
 
-    <!-- About Section -->
     <section id="about">
         <div class="container">
             <div class="section-title">
-                <h2>About Green Network</h2>
-                <p>We are a global community dedicated to environmental protection and sustainable development.</p>
+                <h2>科技，以人为本</h2>
+                <p>我们坚信，真正伟大的技术不仅存在于实验室中，更应无缝融入人类的日常，解决真实的痛点。</p>
             </div>
             <div class="about-content">
-                <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Team planting trees">
-                </div>
                 <div class="about-text">
-                    <h3>Our Mission</h3>
-                    <p>Green Network is committed to creating a sustainable future by protecting natural ecosystems, promoting renewable energy, and empowering communities to take environmental action.</p>
-                    <p>Founded in 2010, we've grown from a small grassroots organization to an international network with over 50,000 members across 120 countries.</p>
-                    <p>Our approach combines scientific research, community engagement, and policy advocacy to address the most pressing environmental challenges of our time.</p>
-                    <a href="#" class="btn">Learn More</a>
+                    <h3>构建万物互联的<span class="gradient-text">智能生态</span></h3>
+                    <p>TechLife 成立于2015年，是一家专注于前沿科技落地的创新型企业。我们的使命是通过底层算法优化与硬件创新，降低尖端技术的使用门槛。</p>
+                    <p>从自动驾驶的感知系统到智能家居的边缘计算节点，我们的技术已悄然渗透进城市的每一个角落，每天为数亿用户提供无感知的智能服务。</p>
+                    <p>未来，我们将继续深耕脑机接口与通用人工智能（AGI）领域，探索人类与机器协同进化的无限可能。</p>
+                    <a href="#" class="btn" style="margin-top: 1rem;">了解公司历程</a>
+                </div>
+                <div class="about-img">
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="科技芯片与数据">
                 </div>
             </div>
+            
             <div class="stats">
                 <div class="stat-item">
-                    <i class="fas fa-tree"></i>
-                    <h3 class="counter" data-target="2500000">0</h3>
-                    <p>Trees Planted</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-users"></i>
-                    <h3 class="counter" data-target="50000">0</h3>
-                    <p>Active Members</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-globe-americas"></i>
-                    <h3 class="counter" data-target="120">0</h3>
-                    <p>Countries Reached</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-recycle"></i>
+                    <i class="fas fa-network-wired"></i>
                     <h3 class="counter" data-target="1500">0</h3>
-                    <p>Cleanup Projects</p>
+                    <p>千万级并发节点</p>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-brain"></i>
+                    <h3 class="counter" data-target="340">0</h3>
+                    <p>自研AI算法模型</p>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-satellite-dish"></i>
+                    <h3 class="counter" data-target="120">0</h3>
+                    <p>覆盖国家与地区</p>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-shield-halved"></i>
+                    <h3 class="counter" data-target="99">0</h3>
+                    <p>安全防御拦截(亿次)</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Initiatives Section -->
-    <section class="initiatives" id="initiatives">
+    <section class="initiatives" id="technologies">
         <div class="container">
             <div class="section-title">
-                <h2>Our Initiatives</h2>
-                <p>Discover the key programs and projects we're implementing to protect our planet.</p>
+                <h2>三大核心引擎</h2>
+                <p>驱动数字世界高速运转的底层技术架构</p>
             </div>
             <div class="initiatives-grid">
                 <div class="initiative-card">
                     <div class="initiative-img">
-                        <img src="https://dialogue.earth/content/uploads/2021/04/lessons-from-the-rush-to-reforest-china-dialogue-2400x1599.jpg" alt="Reforestation">
+                        <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=1965&q=80" alt="Artificial Intelligence">
                     </div>
                     <div class="initiative-content">
-                        <h3>Global Reforestation</h3>
-                        <p>Planting millions of trees worldwide to restore ecosystems, combat climate change, and protect biodiversity.</p>
-                        <a href="#" class="btn">Learn More</a>
+                        <h3>认知级人工智能 (AI)</h3>
+                        <p>基于最新一代 Transformer 架构的大型语言模型，具备多模态理解能力。不仅能读懂文字，更能解析图像、声音与情感，为您提供专家级的决策辅助。</p>
+                        <a href="#" class="btn" style="padding: 0.5rem 1.5rem; font-size: 0.9rem;">查看文档</a>
                     </div>
                 </div>
                 <div class="initiative-card">
                     <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Ocean Conservation">
+                        <img src="https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Internet of Things">
                     </div>
                     <div class="initiative-content">
-                        <h3>Ocean Conservation</h3>
-                        <p>Protecting marine ecosystems, reducing plastic pollution, and promoting sustainable fishing practices.</p>
-                        <a href="#" class="btn">Learn More</a>
+                        <h3>超低延迟物联网 (IoT)</h3>
+                        <p>依托 5G/6G 通讯与边缘计算技术，我们的毫秒级响应网络让城市基础设施、工业机械与个人终端实现毫秒级数据同步，打造真正的“智慧城市”。</p>
+                        <a href="#" class="btn" style="padding: 0.5rem 1.5rem; font-size: 0.9rem;">行业解决方案</a>
                     </div>
                 </div>
                 <div class="initiative-card">
                     <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" alt="Renewable Energy">
+                        <img src="https://images.unsplash.com/photo-1614729939124-032f0b56c9ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80" alt="Quantum Space">
                     </div>
                     <div class="initiative-content">
-                        <h3>Renewable Energy</h3>
-                        <p>Promoting solar, wind, and other clean energy sources to reduce dependence on fossil fuels.</p>
-                        <a href="#" class="btn">Learn More</a>
+                        <h3>空间计算与元宇宙</h3>
+                        <p>通过高精度空间锚点与实时光线追踪渲染，打破屏幕的限制。将数字信息以全息形态完美融合进现实物理世界，开启全新的沉浸式交互体验。</p>
+                        <a href="#" class="btn" style="padding: 0.5rem 1.5rem; font-size: 0.9rem;">体验 Demo</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="cta" id="get-involved">
+    <section class="cta" id="join">
         <div class="container">
-            <h2>Join Our Global Movement</h2>
-            <p>Together, we can create a sustainable future for generations to come. Every action counts, no matter how small.</p>
-            <a href="#" class="btn">Become a Member</a>
+            <h2>准备好接入<span class="gradient-text">未来网络</span>了吗？</h2>
+            <p>加入我们的开发者生态或注册成为早期体验用户，获取专属 API 密钥，优先体验下一代智能技术。</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="#" class="btn btn-primary"><i class="fas fa-terminal" style="margin-right: 8px;"></i>开发者控制台</a>
+                <a href="#" class="btn"><i class="fas fa-user-astronaut" style="margin-right: 8px;"></i>个人用户注册</a>
+            </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer id="contact">
+    <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
-                    <h3>Green Network</h3>
-                    <p>We are dedicated to protecting our planet through collaborative action, education, and sustainable solutions.</p>
+                    <h3 style="font-size: 1.5rem;"><i class="fas fa-microchip" style="color: var(--accent); margin-right: 8px;"></i>TechLife</h3>
+                    <p>用代码编织现实，用算法计算未来。我们是一家追求极致极客精神的科技企业。</p>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-weixin"></i></a>
+                        <a href="#"><i class="fab fa-weibo"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
                     </div>
                 </div>
                 <div class="footer-column">
-                    <h3>Quick Links</h3>
+                    <h3>开源生态</h3>
                     <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#initiatives">Initiatives</a></li>
-                        <li><a href="#get-involved">Get Involved</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#">机器学习框架</a></li>
+                        <li><a href="#">边缘计算系统</a></li>
+                        <li><a href="#">API 文档中心</a></li>
+                        <li><a href="#">开发者社区</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h3>Our Programs</h3>
+                    <h3>解决方案</h3>
                     <ul class="footer-links">
-                        <li><a href="#">Reforestation</a></li>
-                        <li><a href="#">Ocean Cleanup</a></li>
-                        <li><a href="#">Wildlife Protection</a></li>
-                        <li><a href="#">Climate Education</a></li>
-                        <li><a href="#">Sustainable Agriculture</a></li>
+                        <li><a href="#">智能驾驶 (AutoDrive)</a></li>
+                        <li><a href="#">智慧城市大脑</a></li>
+                        <li><a href="#">金融级安全防护</a></li>
+                        <li><a href="#">企业云端协同</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Copper Creek Drive, New York</p>
-                    <p><i class="fas fa-phone"></i> +1 (312) 171-0771</p>
-                    <p><i class="fas fa-envelope"></i> support@greennetwork.org</p>
+                    <h3>联系我们</h3>
+                    <p><i class="fas fa-map-marker-alt" style="color: var(--accent); margin-right: 10px;"></i> 科技园区 星际大道 1024 号</p>
+                    <p><i class="fas fa-phone" style="color: var(--accent); margin-right: 10px;"></i> 400-1024-2048</p>
+                    <p><i class="fas fa-envelope" style="color: var(--accent); margin-right: 10px;"></i> hello@techlife.dev</p>
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2025 Green Network. All rights reserved.</p>
+                <p>&copy; 2025 TechLife 科技改变生活. 保留所有权利. | 探索未知边界</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Mobile Menu Toggle
+        // 移动端菜单切换
         document.querySelector('.mobile-menu').addEventListener('click', function() {
             document.querySelector('nav ul').classList.toggle('active');
         });
 
-        // Counter Animation
+        // 数据面板动画递增效果
         function animateCounters() {
             const counters = document.querySelectorAll('.counter');
-            const speed = 200; // The lower the slower
+            const speed = 200; // 控制速度，越低越慢
             
             counters.forEach(counter => {
                 const target = +counter.getAttribute('data-target');
                 const count = +counter.innerText;
                 
+                // 计算每次递增的值
                 const inc = target / speed;
                 
                 if(count < target) {
                     counter.innerText = Math.ceil(count + inc);
-                    setTimeout(animateCounters, 1);
+                    setTimeout(() => {
+                        animateCounters();
+                    }, 10);
                 } else {
                     counter.innerText = target;
                 }
             });
         }
 
-        // Initialize counters when page loads
-        window.addEventListener('load', animateCounters);
+        // 监听滚动，当统计面板进入视口时才触发动画
+        let animated = false;
+        window.addEventListener('scroll', () => {
+            const statsSection = document.querySelector('.stats');
+            if (!statsSection) return;
+            
+            const position = statsSection.getBoundingClientRect().top;
+            const screenPosition = window.innerHeight;
 
-        // Smooth scrolling for navigation links
+            if(position < screenPosition && !animated) {
+                animateCounters();
+                animated = true; // 确保只动画一次
+            }
+        });
+
+        // 页面加载时如果在视口内也触发一次
+        window.addEventListener('load', () => {
+             const statsSection = document.querySelector('.stats');
+             if(statsSection.getBoundingClientRect().top < window.innerHeight) {
+                 animateCounters();
+                 animated = true;
+             }
+        });
+
+        // 平滑滚动锚点链接
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -708,15 +767,15 @@
                 const targetElement = document.querySelector(targetId);
                 if(targetElement) {
                     window.scrollTo({
-                        top: targetElement.offsetTop - 80,
+                        top: targetElement.offsetTop - 70, // 减去导航栏高度
                         behavior: 'smooth'
                     });
                     
+                    // 点击后自动收起手机菜单
                     document.querySelector('nav ul').classList.remove('active');
                 }
             });
         });
     </script>
 </body>
-
 </html>
